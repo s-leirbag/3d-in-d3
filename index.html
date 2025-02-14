@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D3 more like 3D</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        background: black;
+      }
+      svg {
+        display: block;
+        background: black;
+        position: absolute;
+        /* opacity: 0; */
+      }
+      /* #d3svg {
+        opacity: 1;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <svg
+      id="d3svg"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      id="Layer_1"
+      x="0px"
+      y="0px"
+      viewBox="0 0 512 512"
+      style="enable-background: new 0 0 512 512"
+      xml:space="preserve"
+      width="600"
+      height="400"
+    >
+      <style type="text/css">
+        .st0 {
+          fill: url(#XMLID_6_);
+        }
+        .st1 {
+          fill: url(#XMLID_7_);
+        }
+        .st2 {
+          fill: url(#XMLID_10_);
+        }
+        .st3 {
+          fill: url(#XMLID_11_);
+        }
+        .st4 {
+          fill: url(#XMLID_13_);
+        }
+        .st5 {
+          fill: url(#XMLID_14_);
+        }
+      </style>
+      <g id="XMLID_1_">
+        <linearGradient
+          id="XMLID_6_"
+          gradientUnits="userSpaceOnUse"
+          x1="-699.5067"
+          y1="798.6509"
+          x2="-697.5054"
+          y2="798.6509"
+          gradientTransform="matrix(153.7661 161.9336 164.0424 -151.7893 -23241.0801 234550.6406)"
+        >
+          <stop offset="0" style="stop-color: #f9a03c" />
+          <stop offset="1" style="stop-color: #f7974e" />
+        </linearGradient>
+        <path
+          id="XMLID_3_"
+          class="st0"
+          d="M511.25,364.88c0.28-2.24,0.42-4.49,0.56-6.73c0.14-2.67-161.22-155.75-161.22-155.75h-3.79   C346.8,202.4,510.27,374.84,511.25,364.88z"
+        />
+
+        <linearGradient
+          id="XMLID_7_"
+          gradientUnits="userSpaceOnUse"
+          x1="-699.3664"
+          y1="798.1517"
+          x2="-697.3651"
+          y2="798.1517"
+          gradientTransform="matrix(143.3682 140.5288 139.8276 -144.0872 -11379.7676 213394.8281)"
+        >
+          <stop offset="0" style="stop-color: #f9a03c" />
+          <stop offset="1" style="stop-color: #f7974e" />
+        </linearGradient>
+        <path
+          id="XMLID_4_"
+          class="st1"
+          d="M167.06,311.84c-0.28,0.42-0.42,0.98-0.7,1.4c-0.28,0.42-0.42,0.98-0.7,1.4   c-5.19,10.66,71.98,86.15,78.15,77.03c0.28-0.42,0.56-0.84,0.84-1.26c0.28-0.42,0.56-0.98,0.98-1.4   C250.55,381.44,169.17,306.93,167.06,311.84z"
+        />
+
+        <linearGradient
+          id="XMLID_10_"
+          gradientUnits="userSpaceOnUse"
+          x1="-698.9774"
+          y1="798.498"
+          x2="-696.9763"
+          y2="798.498"
+          gradientTransform="matrix(130.1761 145.2211 149.2466 -126.6649 -28094.1113 202857.0469)"
+        >
+          <stop offset="0" style="stop-color: #f9a03c" />
+          <stop offset="1" style="stop-color: #f7974e" />
+        </linearGradient>
+        <path
+          id="XMLID_5_"
+          class="st2"
+          d="M276.08,417.92c-0.28,0.42-1.82,3.09-3.23,4.49c-0.28,0.42,75.35,75.49,75.35,75.49h6.73   C354.94,497.76,284.08,421.01,276.08,417.92z"
+        />
+
+        <linearGradient
+          id="XMLID_11_"
+          gradientUnits="userSpaceOnUse"
+          x1="-700.7192"
+          y1="798.3319"
+          x2="-698.718"
+          y2="798.3319"
+          gradientTransform="matrix(182.0455 227.3219 240.3015 -172.2125 -64212.7031 296771.25)"
+        >
+          <stop offset="0" style="stop-color: #f26d58" />
+          <stop offset="1" style="stop-color: #f9a03c" />
+        </linearGradient>
+        <path
+          id="XMLID_8_"
+          class="st3"
+          d="M511.95,356.74c-3.51,78.29-68.33,141.01-147.47,141.01h-10.66l-79.14-77.87   c6.45-9.12,12.49-18.66,17.96-28.62h71.84c22.73,0,41.25-18.52,41.25-41.25c0-22.73-18.52-41.25-41.25-41.25h-42.51   c3.23-17.12,5.05-34.8,5.05-52.9c0-18.38-1.82-36.2-5.19-53.6h26.38L511.53,363.2C511.67,361.09,511.81,358.99,511.95,356.74z    M42.89,13.4H-0.05v106.5h42.94c75.07,0,136.1,61.04,136.1,136.1c0,20.35-4.49,39.85-12.63,57.25l78.43,77.17   c25.68-38.45,40.83-84.75,40.83-134.42C285.49,122.28,176.6,13.4,42.89,13.4z"
+        />
+
+        <linearGradient
+          id="XMLID_13_"
+          gradientUnits="userSpaceOnUse"
+          x1="-698.8049"
+          y1="798.0835"
+          x2="-696.8036"
+          y2="798.0835"
+          gradientTransform="matrix(167.6139 119.786 110.1362 -182.2996 29471.1523 229227.2188)"
+        >
+          <stop offset="0" style="stop-color: #b84e51" />
+          <stop offset="1" style="stop-color: #f68e48" />
+        </linearGradient>
+        <path
+          id="XMLID_9_"
+          class="st4"
+          d="M364.34,13.4H190.35c42.51,25.96,77.73,62.72,101.59,106.5h72.26   c22.73,0,41.25,18.52,41.25,41.25s-18.52,41.25-41.25,41.25h-16.28l163.32,160.94c0.42-4.35,0.56-8.7,0.56-13.19   c0-35.92-12.91-68.89-34.24-94.43c21.33-25.68,34.24-58.51,34.24-94.43C512.09,79.77,445.86,13.4,364.34,13.4z"
+        />
+
+        <linearGradient
+          id="XMLID_14_"
+          gradientUnits="userSpaceOnUse"
+          x1="-698.7883"
+          y1="800.4227"
+          x2="-696.7872"
+          y2="800.4227"
+          gradientTransform="matrix(8.6559 114.7907 219.056 -4.5359 -169122.6094 84201.7344)"
+        >
+          <stop offset="0" style="stop-color: #f9a03c" />
+          <stop offset="1" style="stop-color: #f7974e" />
+        </linearGradient>
+        <path
+          id="XMLID_12_"
+          class="st5"
+          d="M353.68,497.76H191.62c32.55-20.2,60.76-46.72,82.92-77.87L353.68,497.76z M244.65,390.42   l-78.43-77.17c-21.61,46.58-68.89,78.86-123.47,78.86h-42.8v106.5h42.94C126.93,498.6,201.16,455.52,244.65,390.42z"
+        />
+      </g>
+    </svg> -->
+    <script>
+      let hideInstructions = false;
+      const instructionsDuration = 10000;
+      setTimeout(() => {
+        hideInstructions = true;
+      }, instructionsDuration);
+      const startTime = Date.now();
+
+      // let mouseX = 0,
+      //   mouseY = 0;
+      // document.onmousemove = (e) => {
+      //   mouseX = e.clientX;
+      //   mouseY = e.clientY;
+      // };
+
+      // const screenWidth = 600;
+      // const screenHeight = 400;
+      // const screenWidth = window.innerWidth;
+      // const screenHeight = window.innerHeight;
+      const screenWidth = Math.min(window.innerWidth, window.innerHeight * 1.5);
+      const screenHeight = screenWidth / 1.5;
+
+      // SVG canvas
+      const svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", screenWidth)
+        .attr("height", screenHeight);
+      d3.select("body").style("font-family", "Orbitron, sans-serif");
+      const cam = {
+        fov: Math.PI / 2,
+        zNear: 0.01,
+        zFar: 1000,
+      };
+
+      const p = {
+        x: 0,
+        z: 0,
+        y: 0,
+        xVel: 0,
+        yVel: 0,
+        zVel: 0,
+        dir: -Math.PI / 2,
+        dirVel: 0,
+      };
+
+      class Object3D {
+        constructor(color, x, y, z, xVel, yVel, zVel, dir, size, costumeName) {
+          this.color = color;
+          this.x = x;
+          this.y = y;
+          this.z = z;
+          this.xVel = xVel;
+          this.yVel = yVel;
+          this.zVel = zVel;
+          this.dir = dir;
+          this.size = size;
+          this.costumeName = costumeName;
+          this.xRel = 0;
+          this.zRel = 0;
+          this.yRel = 0;
+          this.distRel = 0;
+          this.drawX = 0;
+          this.drawY = 0;
+        }
+      }
+
+      const objects = [
+        // new Object3D("cube", 0, 0, 5, 0, 0, 0, 0, 1, "cube"),
+        // new Object3D("cube", 0, 0, -1, 0, 0, 0, 0, 1, "cube"),
+        // new Object3D("cube", 5, 0, -5, 0, 0, 0, 0, 0.4, "cube"),
+        new Object3D("white", -0.5, 0, -2, 0, 0, 0, 0, 1, "dpath"),
+        new Object3D("white", 0.5, 0, -2, 0, 0, 0, 0, 1, "3path"),
+        new Object3D("peachpuff", 0.7, -0.5, -2.5, 0, 0, 0, 0, 1, "lineA"),
+        new Object3D("orange", -1.6, 3.3, -3, 0, 0, 0, 0, 1.3, "cube"),
+        new Object3D("darkorange", -0.3, 1.5, -3, 0, 0, 0, 0, 1, "circle"),
+        new Object3D("sandybrown", -0.8, -2.6, -3, 0, 0, 0, 0, 0.8, "polyA"),
+        new Object3D("coral", 1, -3.1, -3, 0, 0, 0, 0, 0.9, "polyA"),
+        new Object3D("gold", 1, 0, -3, 0, 0, 0, 0, 0.9, "cube"),
+        new Object3D("darkorange", 1.4, 2.5, -3, 0, 0, 0, 0, 0.7, "polyA"),
+        new Object3D("peachpuff", -1.6, 3, -3.4, 0, 0, 0, 0, 2, "lineA"),
+        new Object3D("orangered", 1.9, -3.3, -3.8, 0, 0, 0, 0, 1.3, "cube"),
+        new Object3D("orangered", -0.4, -1.1, -3.8, 0, 0, 0, 0, 1, "cube"),
+        new Object3D("coral", 0.9, 4.4, -4, 0, 0, 0, 0, 1.7, "cube"),
+        new Object3D("coral", -2.1, -4.4, -4, 0, 0, 0, 0, 1.7, "cube"),
+        new Object3D("orangered", -1.3, 4.4, -4.5, 0, 0, 0, 0, 1.5, "cube"),
+        new Object3D("orange", 2.5, 2, -5, 0, 0, 0, 0, 1.5, "cube"),
+        new Object3D("peachpuff", 0.5, -5.7, -5, 0, 0, 0, 0, 1.7, "cube"),
+        new Object3D("darkorange", -0.3, 0.1, -5.5, 0, 0, 0, 0, 1.1, "polyA"),
+        new Object3D("orange", 3.2, -3, -6, 0, 0, 0, 0, 2, "circle"),
+        new Object3D("peachpuff", -1.2, 4.5, -6, 0, 0, 0, 0, 1.9, "cube"),
+        new Object3D("peachpuff", -3, -5.4, -6.3, 0, 0, 0, 0, 4, "lineA"),
+        new Object3D("darkorange", -2.3, -6.8, -6.5, 0, 0, 0, 0, 2.7, "circle"),
+        new Object3D("sandybrown", 3, 0, -6.5, 0, 0, 0, 0, 2, "circle"),
+        new Object3D("gold", -1.1, -4.5, -7, 0, 0, 0, 0, 1.9, "cube"),
+        new Object3D("orange", 3, 8, -7, 0, 0, 0, 0, 1.9, "cube"),
+        new Object3D("gold", 0.5, 9.5, -8, 0, 0, 0, 0, 2, "cube"),
+      ];
+
+      for (let i = 0; i < 100; i++) {
+        const distance = 17 + Math.random() * 10;
+
+        const theta = Math.random() * 2 * Math.PI;
+
+        const phi = Math.random() * Math.PI;
+
+        const x = distance * Math.sin(phi) * Math.cos(theta);
+        const y = distance * Math.sin(phi) * Math.sin(theta);
+        const z = distance * Math.cos(phi);
+
+        const size = Math.random() * 0.5 + 0.5;
+
+        const hue = Math.random() * 360;
+        const saturation = 0.1 + Math.random() * 0.2;
+        const lightness = 0.2 + Math.random() * 0.2;
+        const color = `hsl(${hue}, ${saturation * 100}%, ${lightness * 100}%)`;
+
+        const shapes = ["cube", "circle", "polyA", "lineA"];
+        const randomIndex = Math.floor(Math.random() * shapes.length);
+
+        objects.push(
+          new Object3D(color, x, y, z, 0, 0, 0, 0, size, shapes[randomIndex])
+        );
+      }
+
+      const pressedKeys = {};
+      document.addEventListener("keydown", (event) => {
+        pressedKeys[event.key] = true;
+      });
+      document.addEventListener("keyup", (event) => {
+        pressedKeys[event.key] = false;
+      });
+      function isKeyPressed(key) {
+        return pressedKeys[key] || false;
+      }
+
+      function updatePlayer() {
+        if (isKeyPressed("ArrowLeft")) {
+          p.dirVel -= Math.PI / 60;
+        }
+        if (isKeyPressed("ArrowRight")) {
+          p.dirVel += Math.PI / 60;
+        }
+        p.dirVel *= 0.8;
+        p.dir = (p.dir + p.dirVel) % (2 * Math.PI);
+        if (p.dir > Math.PI) {
+          p.dir -= 2 * Math.PI;
+        }
+        if (p.dir < -Math.PI) {
+          p.dir += 2 * Math.PI;
+        }
+        p.xVel +=
+          0.1 *
+          ((isKeyPressed("w") - isKeyPressed("s")) * Math.cos(p.dir) +
+            (isKeyPressed("d") - isKeyPressed("a")) *
+              Math.cos(p.dir + Math.PI / 2));
+        p.zVel +=
+          0.1 *
+          ((isKeyPressed("w") - isKeyPressed("s")) * Math.sin(p.dir) +
+            (isKeyPressed("d") - isKeyPressed("a")) *
+              Math.sin(p.dir + Math.PI / 2));
+        p.yVel += 0.1 * (isKeyPressed("e") - isKeyPressed("q"));
+        p.xVel *= 0.8;
+        p.zVel *= 0.8;
+        p.yVel *= 0.8;
+        p.x += p.xVel;
+        p.z += p.zVel;
+        p.y += p.yVel;
+      }
+
+      function isRectOnScreen(centerX, centerY, width, height) {
+        return !(
+          centerX - width / 2 > screenWidth / 2 ||
+          centerX + width / 2 < -screenWidth / 2 ||
+          centerY - height / 2 > screenHeight / 2 ||
+          centerY + height / 2 < -screenHeight / 2
+        );
+      }
+
+      function render() {
+        svg.selectAll("*").remove();
+
+        for (const obj of objects) {
+          obj.xRel =
+            (obj.x - p.x) * Math.cos(-Math.PI / 2 - p.dir) -
+            (obj.z - p.z) * Math.sin(-Math.PI / 2 - p.dir);
+          obj.zRel =
+            (obj.x - p.x) * Math.sin(-Math.PI / 2 - p.dir) +
+            (obj.z - p.z) * Math.cos(-Math.PI / 2 - p.dir);
+          obj.yRel = obj.y - p.y;
+          obj.distRel = Math.sqrt(
+            obj.xRel ** 2 + obj.yRel ** 2 + obj.zRel ** 2
+          );
+
+          obj.drawX =
+            obj.xRel *
+            (cam.zNear / -obj.zRel) *
+            (screenWidth / 2 / (Math.tan(cam.fov / 2) * cam.zNear));
+          obj.drawY =
+            -obj.yRel *
+            (cam.zNear / -obj.zRel) *
+            (screenHeight / 2 / (Math.tan(cam.fov / 2) * cam.zNear)) *
+            (screenHeight / screenWidth);
+        }
+
+        objects.sort((a, b) => a.zRel - b.zRel);
+
+        for (const obj of objects) {
+          const costumeWidth =
+            (obj.size / (2 * Math.tan(cam.fov / 2) * obj.distRel)) *
+            screenWidth;
+          const costumeHeight = costumeWidth;
+
+          if (
+            isRectOnScreen(obj.drawX, obj.drawY, costumeWidth, costumeHeight) &&
+            -obj.zRel > cam.zNear &&
+            -obj.zRel < cam.zFar
+          ) {
+            if (obj.costumeName === "cube") {
+              svg
+                .append("rect")
+                .attr("x", obj.drawX + screenWidth / 2 - costumeWidth / 2)
+                .attr("y", obj.drawY + screenHeight / 2 - costumeHeight / 2)
+                .attr("width", costumeWidth)
+                .attr("height", costumeHeight)
+                .attr("fill", obj.color)
+                .attr("rx", costumeWidth / 10)
+                .attr("ry", costumeWidth / 10);
+            } else if (obj.costumeName === "circle") {
+              svg
+                .append("circle")
+                .attr("cx", obj.drawX + screenWidth / 2)
+                .attr("cy", obj.drawY + screenHeight / 2)
+                .attr("r", costumeWidth / 2)
+                .attr("fill", obj.color);
+            } else if (obj.costumeName === "lineA") {
+              svg
+                .append("line")
+                .attr("x1", obj.drawX + screenWidth / 2)
+                .attr("y1", obj.drawY + screenHeight / 2)
+                .attr("x2", obj.drawX + screenWidth / 2 + costumeWidth / 2)
+                .attr("y2", obj.drawY + screenHeight / 2 + costumeHeight / 3)
+                .attr("stroke", obj.color)
+                .attr("stroke-width", costumeWidth / 5);
+            } else if (obj.costumeName === "polyA") {
+              const points = [
+                [-50, -50],
+                [50, -50],
+                [100, 50],
+                [0, 100],
+                [-100, 50],
+              ];
+              svg
+                .append("polygon")
+                .attr(
+                  "points",
+                  points
+                    .map((point) => {
+                      point[0] *= costumeWidth / 100;
+                      point[1] *= costumeWidth / 100;
+                      point[0] += obj.drawX + screenWidth / 2;
+                      point[1] += obj.drawY + screenHeight / 2;
+                      return point.join(",");
+                    })
+                    .join(" ")
+                )
+                .attr("fill", obj.color);
+            } else if (obj.costumeName === "dpath") {
+              const points_orig = [
+                [-135, -125],
+                [-80, -125],
+                [-30, -100],
+                [10, -50],
+                [10, 50],
+                [-30, 100],
+                [-80, 125],
+                [-135, 125],
+                [-135, 80],
+                [-90, 80],
+                [-40, 40],
+                [-40, -40],
+                [-90, -80],
+                [-135, -80],
+              ];
+              const points = points_orig.map((point) => {
+                return [point[0] + 50, point[1]];
+              });
+              svg
+                .append("polygon")
+                .attr(
+                  "points",
+                  points
+                    .map((point) => {
+                      point[0] *= costumeWidth / 100;
+                      point[1] *= costumeWidth / 100;
+                      point[0] += obj.drawX + screenWidth / 2;
+                      point[1] += obj.drawY + screenHeight / 2;
+                      return point.join(",");
+                    })
+                    .join(" ")
+                )
+                .attr("fill", "none")
+                .attr("stroke", obj.color)
+                .attr("stroke-width", costumeWidth / 10);
+            } else if (obj.costumeName === "3path") {
+              const points = [
+                [-45, -125],
+                [40, -125],
+                [80, -60],
+                [80, -30],
+                [60, -10],
+                [60, 10],
+                [80, 30],
+                [80, 60],
+                [40, 125],
+                [-45, 125],
+                [-45, 80],
+                [20, 80],
+                [30, 60],
+                [30, 25],
+                [-10, 25],
+                [-10, -25],
+                [30, -25],
+                [30, -60],
+                [20, -80],
+                [-45, -80],
+                [-45, -125],
+              ];
+
+              var lineFunc = d3
+                .line()
+                .x(function (d) {
+                  return (
+                    (d[0] * costumeWidth) / 100 + obj.drawX + screenWidth / 2
+                  );
+                })
+                .y(function (d) {
+                  return (
+                    (d[1] * costumeWidth) / 100 + obj.drawY + screenHeight / 2
+                  );
+                });
+
+              svg
+                .append("path")
+                .attr("d", lineFunc(points))
+                .attr("fill", "none")
+                .attr("stroke", obj.color)
+                .attr("stroke-width", costumeWidth / 10)
+                .attr("stroke-linecap", "round")
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-dasharray", "40, 40");
+            }
+          }
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // calc elapsed time since last loop
+        now = Date.now();
+        elapsed = now - then;
+
+        // if enough time has elapsed, draw the next frame
+        if (elapsed > fpsInterval) {
+          // Get ready for next frame by setting then=now, but also adjust for your
+          // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
+          then = now - (elapsed % fpsInterval);
+          updatePlayer();
+          render();
+
+          if (!hideInstructions) {
+            const timeLeft =
+              instructionsDuration / 1000 -
+              Math.floor((Date.now() - startTime) / 1000);
+            const instructions = [
+              "wasd to move",
+              "q/e to move up and down",
+              "Arrow keys to rotate",
+              // count down the number of seconds left
+              `(${timeLeft == 1 ? "1 AAAAHHHHH" : timeLeft})`,
+            ];
+            let y = 15;
+            for (const line of instructions) {
+              svg
+                .append("text")
+                .attr("x", 10)
+                .attr("y", y)
+                .text(`${line}`)
+                .attr("fill", "white");
+              y += 20;
+            }
+          } else {
+            svg
+              .append("text")
+              .attr("x", 10)
+              .attr("y", 15)
+              .text(`s-leirbag`)
+              .attr("fill", "white");
+          }
+          // const stats = {
+          //   x: p.x,
+          //   y: p.y,
+          //   z: p.z,
+          //   dir: p.dir,
+          //   xVel: p.xVel,
+          //   yVel: p.yVel,
+          //   zVel: p.zVel,
+          //   dirVel: p.dirVel,
+          //   mouseX: mouseX,
+          //   mouseY: mouseY,
+          // };
+          // let y = 15;
+          // for (const [key, value] of Object.entries(stats)) {
+          //   svg
+          //     .append("text")
+          //     .attr("x", 10)
+          //     .attr("y", y)
+          //     .text(`${key}: ${value}`)
+          //     .attr("stroke", "white");
+          //   y += 20;
+          // }
+        }
+      }
+
+      // Initial draw and start animation
+      fps = 30;
+      fpsInterval = 1000 / fps;
+      then = Date.now();
+      render();
+      animate();
+
+      // const d3svg = document.getElementById("d3svg");
+      // const path1 = document.getElementById("XMLID_12_");
+      // const path2 = document.getElementById("XMLID_8_");
+      // const path3 = document.getElementById("XMLID_9_");
+      // function isInD3Logo(point) {
+      //   // generate points to the left, right, top, and bottom of the point using a distance of 10
+      //   const distance = 10;
+      //   const left = d3svg.createSVGPoint();
+      //   left.x = point.x - distance;
+      //   left.y = point.y;
+      //   const right = d3svg.createSVGPoint();
+      //   right.x = point.x + distance;
+      //   right.y = point.y;
+      //   const top = d3svg.createSVGPoint();
+      //   top.x = point.x;
+      //   top.y = point.y - distance;
+      //   const bottom = d3svg.createSVGPoint();
+      //   bottom.x = point.x;
+      //   bottom.y = point.y + distance;
+
+      //   // return true if all points are in any of the fill paths
+      //   return (
+      //     (path1.isPointInFill(left) &&
+      //       path1.isPointInFill(right) &&
+      //       path1.isPointInFill(top) &&
+      //       path1.isPointInFill(bottom)) ||
+      //     (path2.isPointInFill(left) &&
+      //       path2.isPointInFill(right) &&
+      //       path2.isPointInFill(top) &&
+      //       path2.isPointInFill(bottom)) ||
+      //     (path3.isPointInFill(left) &&
+      //       path3.isPointInFill(right) &&
+      //       path3.isPointInFill(top) &&
+      //       path3.isPointInFill(bottom))
+      //   );
+      // }
+      // for (let i = 0; i < 100; i++) {
+      //   let point = d3svg.createSVGPoint();
+      //   point.x = 0;
+      //   point.y = 0;
+      //   while (!isInD3Logo(point)) {
+      //     point.x = Math.random() * 512;
+      //     point.y = Math.random() * 512;
+      //   }
+
+      //   console.log(point);
+      //   // Create a circle element for the point
+      //   const circle = document.createElementNS(
+      //     "http://www.w3.org/2000/svg",
+      //     "circle"
+      //   );
+      //   circle.setAttribute("cx", point.x);
+      //   circle.setAttribute("cy", point.y);
+      //   circle.setAttribute("r", 5); // Radius of the circle
+      //   circle.setAttribute("fill", "lime"); // Fill color of the circle
+
+      //   // Append the circle to the SVG
+      //   d3svg.appendChild(circle);
+      // }
+
+      // Create a circle element for the point
+      // const circle = document.createElementNS(
+      //   "http://www.w3.org/2000/svg",
+      //   "circle"
+      // );
+      // circle.setAttribute("cx", 128);
+      // circle.setAttribute("cy", 400);
+      // circle.setAttribute("r", 20); // Radius of the circle
+      // circle.setAttribute("fill", "white"); // Fill color of the circle
+      // d3svg.appendChild(circle);
+
+      // function screenPosToD3LogoSvgPos(x, y) {
+      //   const svgPoint = d3svg.createSVGPoint();
+      //   svgPoint.x = x;
+      //   svgPoint.y = y;
+      //   return svgPoint.matrixTransform(d3svg.getScreenCTM().inverse());
+      // }
+      // function d3LogoSvgPosToScreenPos(x, y) {
+      //   const svgPoint = d3svg.createSVGPoint();
+      //   svgPoint.x = x;
+      //   svgPoint.y = y;
+      //   return svgPoint.matrixTransform(d3svg.getScreenCTM());
+      // }
+      // console.log(
+      //   "yo",
+      //   d3LogoSvgPosToScreenPos(128, 400),
+      //   screenPosToD3LogoSvgPos(200, 312)
+      // );
+      console.log(
+        "%cWELL",
+        "color: #0078D4; font-size: 24px; font-weight: bold"
+      );
+      console.log(
+        "%cHELLO",
+        "color: #FF6347; font-size: 24px; font-weight: bold"
+      );
+    </script>
+  </body>
+</html>
