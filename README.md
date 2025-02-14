@@ -1,6 +1,6 @@
 D3 More Like 3D
 ===
-### https://s-leirbag.github.io/a1-ghd3/
+### https://s-leirbag.github.io/3d-in-d3/
 An interactive 3d presentation of the d3 logo for WPI's Data Visualization course.  
 Move with WASD, EQ, Arrow Keys!  
 
